@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .message-item { border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin-bottom: 10px; }
+    .message-actions { margin-top: 10px; display: flex; gap: 10px; }
+    .btn { padding: 5px 10px; border-radius: 3px; border: none; cursor: pointer; text-decoration: none; }
+    .btn-edit { background-color: #4CAF50; color: white; }
+    .btn-delete { background-color: #f44336; color: white; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Messages</h1>
+
+    {% if messages is not empty %}
+        {% for message in messages %}
+            <div class="message-item">
+                <strong>De :</strong> {{ message.fromEmployee.name }} <br>
+                <strong>À :</strong> {{ message.toEmployee.name }} <br>
+                <strong>Raison :</strong> {{ message.reason }} <br>
+                <strong>Date :</strong> {{ message.createdAt|date('d/m/Y H:i') }}
+
+                <div class="message-actions">
+                    <a href="{{ path('message_edit', {id: message.id}) }}" class="btn btn-edit">Modifier</a>
+                    <form action="{{ path('message_delete', {id: message.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce message ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ message.id) }}">
+                        <button type="submit" class="btn btn-delete">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Aucun message à afficher.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+

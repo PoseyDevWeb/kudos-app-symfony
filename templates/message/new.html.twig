@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Envoyer un Message{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Envoyer un Message de Remerciement 🎉</h2>
+                </div>
+
+                <div class="card-body">
+                    {{ form_start(form) }}
+
+                    <div class="mb-3">
+                        {{ form_label(form.fromEmployee, 'Qui envoie le message ?', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.fromEmployee, {'attr': {'class': 'form-select'}}) }}
+                        {{ form_errors(form.fromEmployee) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.toEmployee, 'À qui souhaitez-vous envoyer le message ?', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.toEmployee, {'attr': {'class': 'form-select'}}) }}
+                        {{ form_errors(form.toEmployee) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.reason, 'Votre message', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.reason, {'attr': {'class': 'form-control', 'rows': '5', 'placeholder': 'Exprimez votre gratitude ici...'}}) }}
+                        {{ form_errors(form.reason) }}
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-paper-plane"></i> Envoyer le message
+                        </button>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Some custom CSS for further refinement -->
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card-header {
+        background-color: #007bff;
+    }
+
+    .card {
+        border-radius: 15px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 10px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+</style>
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages de {{ user.name }}{% endblock %}
+
+{% block body %}
+<style>
+    .message-container { display: flex; justify-content: space-between; margin-top: 20px; }
+    .message-column { width: 45%; border: 1px solid #ddd; padding: 10px; border-radius: 5px; }
+    .message-item { margin-bottom: 10px; padding: 10px; background-color: #f9f9f9; border-radius: 5px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Messages de {{ user.name }}</h1>
+
+    <div class="message-container">
+        <!-- Colonne des messages envoyés -->
+        <div class="message-column">
+            <h2>Messages envoyés</h2>
+            {% if sentMessages is not empty %}
+                {% for message in sentMessages %}
+                    <div class="message-item">
+                        <p><strong>À :</strong> {{ message.toEmployee.name }}</p>
+                        <p>{{ message.reason }}</p>
+                        <p><em>{{ message.createdAt|date('d/m/Y H:i') }}</em></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucun message envoyé.</p>
+            {% endif %}
+        </div>
+
+        <!-- Colonne des messages reçus -->
+        <div class="message-column">
+            <h2>Messages reçus</h2>
+            {% if receivedMessages is not empty %}
+                {% for message in receivedMessages %}
+                    <div class="message-item">
+                        <p><strong>De :</strong> {{ message.fromEmployee.name }}</p>
+                        <p>{{ message.reason }}</p>
+                        <p><em>{{ message.createdAt|date('d/m/Y H:i') }}</em></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucun message reçu.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

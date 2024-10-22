@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
+        font: 18px/1.5 sans-serif;
+    }
+    .user-item {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .user-avatar {
+        margin-right: 15px;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+    }
+    .user-info {
+        font-size: 18px;
+    }
+    .user-links {
+        margin-top: 10px;
+    }
+    .view-all-messages {
+        display: inline-block;
+        margin: 20px 0;
+        padding: 15px 30px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 20px; /* Taille du texte */
+        transition: background-color 0.3s;
+    }
+    .view-all-messages:hover {
+        background-color: #0056b3; /* Couleur au survol */
+    }
+</style>
+
+<div class="example-wrapper">
+
+    <h1>Liste des utilisateurs</h1>
+
+    {% if users is not empty %}
+        <a href="{{ path('message_index') }}" class="view-all-messages">Voir tous les messages</a>
+        {% for user in users %}
+            <div class="user-item">
+                <img src="{{ asset('uploads/avatars/' ~ user.avatar) }}" alt="Avatar de {{ user.name }}" class="user-avatar">
+                <div class="user-info">
+                    <strong>{{ user.name }}</strong>
+                    <div class="user-links">
+                        <a href="{{ path('user_messages', {id: user.id}) }}">Voir les messages de {{ user.name }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Aucun utilisateur trouvé.</p>
+    {% endif %}
+</div>
+{% endblock %}

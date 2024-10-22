@@ -1,0 +1,16 @@
+
+body {
+    background-color: #f8f9fa; /* Couleur d'arrière-plan douce */
+}
+
+.card {
+    border-radius: 10px; /* Coins arrondis pour la carte */
+}
+
+h1 {
+    margin-bottom: 20px; /* Espacement en bas du titre */
+}
+
+.btn {
+    width: 100%; /* Bouton s'étend sur toute la largeur */
+}

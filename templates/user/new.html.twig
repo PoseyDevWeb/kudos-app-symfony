@@ -1,0 +1,59 @@
+{# templates/user/new.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouvel utilisateur{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center">Créer un nouvel utilisateur</h1>
+
+        {# Afficher les messages flash (si vous en utilisez) #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="card">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
+                    <div class="mb-3">
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nom'}}) }}
+                        {{ form_errors(form.name) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre email'}}) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.password) }}
+                        {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe'}}) }}
+                        {{ form_errors(form.password) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.avatar) }}
+                        {{ form_widget(form.avatar, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.avatar) }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Créer l'utilisateur</button>
+
+                    {{ form_end(form) }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
